@@ -14,6 +14,7 @@ public class MazeSolverDfs implements IMazeSolver {
 		this.maze = maze;
 		this.stack = new ArrayDeque<>();
 		maze.getStart().setVisited(true);
+		maze.getStart().setInPath(true);
 		this.stack.push(maze.getStart());
 		solveDfs();
 	}
@@ -23,24 +24,21 @@ public class MazeSolverDfs implements IMazeSolver {
 		if (block == null) {
 			throw new IllegalArgumentException("No solution available");
 		} else if (block.equals(maze.getEnd())) {
-			print();
 			return;
 		} else {
 			Block next = maze.getNextAisle(block);
 			// System.out.println("next:" + next);
 			if (next == null) {
 				Block discard = stack.pop();
+				discard.setInPath(false);
 				// System.out.println("Popped:" + discard);
 			} else {
 				next.setVisited(true);
+				next.setInPath(true);
 				stack.push(next);
 			}
 		}
 		solveDfs();
-	}
-
-	private void print() {
-		System.out.println("Solution:" + stack);
 	}
 
 }

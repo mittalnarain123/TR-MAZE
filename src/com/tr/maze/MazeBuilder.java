@@ -12,6 +12,9 @@ public class MazeBuilder {
 		try {
 			Block[][] blocks = new Block[rows][columns];
 			for (int i = 0; i < rows; i++) {
+				if (data[i].length != columns) {
+					throw new IllegalArgumentException("Invalid data");
+				}
 				for (int j = 0; j < columns; j++) {
 					if (data[i][j] == 0) {
 						blocks[i][j] = new Aisle(i, j);
@@ -23,9 +26,8 @@ public class MazeBuilder {
 				}
 			}
 
-			// TODO: validate
-			Block start = new Aisle(startX, startY);
-			Block end = new Aisle(finishX, finishY);
+			Block start = blocks[startX][startY];
+			Block end = blocks[finishX][finishY];
 
 			Maze maze = new Maze(blocks, start, end);
 			return maze;

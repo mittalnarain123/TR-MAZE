@@ -64,4 +64,15 @@ public class Maze implements IMaze {
 		return blocks;
 	}
 
+	@Override
+	public String display() {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < blocks.length; i++) {
+			for (int j = 0; j < blocks[i].length; j++) {
+				builder.append(blocks[i][j].display());
+			}
+			builder.append("\n");
+		}
+		return builder.toString();
+	}
 }

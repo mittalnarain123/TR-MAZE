@@ -9,4 +9,6 @@ public interface IMaze {
 	public Block getNextAisle(Block block);
 
 	public void solve(IMazeSolver mazeSolver);
+
+	public String display();
 }

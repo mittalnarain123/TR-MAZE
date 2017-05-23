@@ -7,13 +7,8 @@ public class Aisle extends Block {
 	}
 
 	@Override
-	public Block getNext() {
-		// TODO Auto-generated method stub
-		return null;
+	public String display() {
+		return isInPath() ? "*" : " ";
 	}
 
-	// @Override
-	// public boolean equals(Object obj) {
-	// return super.equals(obj);
-	// }
 }

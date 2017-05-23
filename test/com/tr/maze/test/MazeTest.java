@@ -27,6 +27,13 @@ public class MazeTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidMazeDataException2() {
+		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1, 1 } };
+		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
+		maze.solve(new MazeSolverDfs());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeStartException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 5, 5, 3, 1);
@@ -47,11 +54,17 @@ public class MazeTest {
 		maze.solve(new MazeSolverDfs());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testEazyMazeNoSolution() {
+		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
+		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 3);
+		maze.solve(new MazeSolverDfs());
+	}
+
 	@Test
 	public void testEqualsWallAisle() {
 		Block a = new Wall(0, 0);
 		Block b = new Aisle(0, 0);
-
 		Assert.assertTrue(a.equals(b));
 	}
 }
