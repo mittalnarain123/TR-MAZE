@@ -14,7 +14,7 @@ public class Aisle extends Block {
 
 	@Override
 	public String display() {
-		return isInPath() ? "*" : " ";
+		return isInPath() ? " * " : "   ";
 	}
 
 }

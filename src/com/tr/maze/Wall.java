@@ -15,7 +15,7 @@ public class Wall extends Block {
 
 	@Override
 	public String display() {
-		return "X";
+		return "xXx";
 	}
 
 }
