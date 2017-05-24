@@ -5,7 +5,7 @@ This is a Java project to implement the Maze Problem. A maze consists of Walls a
 
 The input data for the program includes: 
 
-- Maze definition in a 2D array representaion (0 for Aisle, 1 for Wall), 
+- Maze definition in a 2D array representation (0 for Aisle, 1 for Wall), 
 - Maze entrance point
 - Maze exit point
 
