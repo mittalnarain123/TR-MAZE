@@ -11,6 +11,12 @@ import com.tr.maze.MazeBuilder;
 import com.tr.maze.MazeSolverDfs;
 import com.tr.maze.Wall;
 
+/**
+ * JUnit to test the Maze
+ * 
+ * @author Narain Mittal
+ * 
+ */
 public class MazeTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInsufficientMazeDataException() {
@@ -48,23 +54,29 @@ public class MazeTest {
 	}
 
 	@Test
-	public void testEazyMazeSolution() {
+	public void testMazeSolution() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testEazyMazeNoSolution() {
-		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
-		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 3);
-		maze.solve(new MazeSolverDfs());
+		Assert.assertTrue(maze.solve(new MazeSolverDfs()));
+		Block[][] blocks = maze.getBlocks();
+		for (Block[] bl : blocks) {
+			for (Block b : bl) {
+				if (b instanceof Wall) {
+					Assert.assertFalse(b.isVisited());
+					Assert.assertFalse(b.isInPath());
+				} else if (b instanceof Aisle) {
+					Assert.assertTrue(b.isVisited());
+					Assert.assertTrue(b.isInPath());
+				}
+			}
+		}
 	}
 
 	@Test
-	public void testEqualsWallAisle() {
-		Block a = new Wall(0, 0);
-		Block b = new Aisle(0, 0);
-		Assert.assertTrue(a.equals(b));
+	public void testMazeNoSolution() {
+		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
+		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 2);
+		Assert.assertFalse(maze.solve(new MazeSolverDfs()));
 	}
+
 }

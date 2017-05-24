@@ -1,5 +1,11 @@
 package com.tr.maze;
 
+/**
+ * Provides the skeleton implementation for a Block in a Maze
+ * 
+ * @author Narain Mittal
+ * 
+ */
 public abstract class Block {
 
 	private final Color color;
@@ -8,8 +14,14 @@ public abstract class Block {
 
 	private final int y;
 
+	/**
+	 * Set to true when a block is visited, false otherwise
+	 */
 	private boolean visited;
 
+	/**
+	 * Set to true only if the block is in path to finish, false otherwise
+	 */
 	private boolean inPath;
 
 	public Block(Color color, int x, int y) {
@@ -48,6 +60,13 @@ public abstract class Block {
 		this.inPath = inPath;
 	}
 
+	/*
+	 * 2 Blocks are considered equal if they are at same index.
+	 * 
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -56,9 +75,6 @@ public abstract class Block {
 		if (obj == null) {
 			return false;
 		}
-		// if (getClass() != obj.getClass()) {
-		// return false;
-		// }
 		Block other = (Block) obj;
 		if (x != other.x) {
 			return false;

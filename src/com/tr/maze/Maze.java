@@ -1,5 +1,11 @@
 package com.tr.maze;
 
+/**
+ * Maze data structure. Consists of 2D array of blocks, a starting block and end block.
+ * 
+ * @author Narain Mittal
+ * 
+ */
 public class Maze implements IMaze {
 
 	private final Block[][] blocks;
@@ -34,6 +40,13 @@ public class Maze implements IMaze {
 		return null;
 	}
 
+	/**
+	 * Checks if the block at designated indices is an Aisle which is not visited yet.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return true if valid, false otherwise
+	 */
 	private boolean isValidAisle(int x, int y) {
 		try {
 			Block b = blocks[x][y];
@@ -45,8 +58,8 @@ public class Maze implements IMaze {
 	}
 
 	@Override
-	public void solve(IMazeSolver mazeSolver) {
-		mazeSolver.solve(this);
+	public boolean solve(IMazeSolver mazeSolver) {
+		return mazeSolver.solve(this);
 
 	}
 
