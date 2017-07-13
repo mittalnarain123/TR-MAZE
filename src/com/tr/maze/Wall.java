@@ -14,7 +14,7 @@ public class Wall extends Block {
 	}
 
 	@Override
-	public String display() {
+	public String display(IMazeSolver solver) {
 		return "xxx";
 	}
 

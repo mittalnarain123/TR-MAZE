@@ -14,31 +14,13 @@ public abstract class Block {
 
 	private final int y;
 
-	/**
-	 * Set to true when a block is visited, false otherwise
-	 */
-	private boolean visited;
-
-	/**
-	 * Set to true only if the block is in path to finish, false otherwise
-	 */
-	private boolean inPath;
-
 	public Block(Color color, int x, int y) {
 		this.color = color;
 		this.x = x;
 		this.y = y;
 	}
 
-	public abstract String display();
-
-	public boolean isVisited() {
-		return visited;
-	}
-
-	public void setVisited(boolean visited) {
-		this.visited = visited;
-	}
+	public abstract String display(IMazeSolver solver);
 
 	public Color getColor() {
 		return color;
@@ -50,14 +32,6 @@ public abstract class Block {
 
 	public int getY() {
 		return y;
-	}
-
-	public boolean isInPath() {
-		return inPath;
-	}
-
-	public void setInPath(boolean inPath) {
-		this.inPath = inPath;
 	}
 
 	/*

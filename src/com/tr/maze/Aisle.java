@@ -13,8 +13,8 @@ public class Aisle extends Block {
 	}
 
 	@Override
-	public String display() {
-		return isInPath() ? " * " : "   ";
+	public String display(IMazeSolver solver) {
+		return solver.isBlockInSolution(this) ? " * " : "   ";
 	}
 
 }

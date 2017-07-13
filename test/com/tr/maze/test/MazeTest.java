@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.tr.maze.Aisle;
 import com.tr.maze.Block;
+import com.tr.maze.IMazeSolver;
 import com.tr.maze.Maze;
 import com.tr.maze.MazeBuilder;
 import com.tr.maze.MazeSolverDfs;
@@ -57,16 +58,17 @@ public class MazeTest {
 	public void testMazeSolution() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		Assert.assertTrue(maze.solve(new MazeSolverDfs()));
+		IMazeSolver solver = new MazeSolverDfs();
+		Assert.assertTrue(maze.solve(solver));
 		Block[][] blocks = maze.getBlocks();
 		for (Block[] bl : blocks) {
 			for (Block b : bl) {
 				if (b instanceof Wall) {
-					Assert.assertFalse(b.isVisited());
-					Assert.assertFalse(b.isInPath());
+					Assert.assertFalse(solver.isBlockVisited(b));
+					Assert.assertFalse(solver.isBlockInSolution(b));
 				} else if (b instanceof Aisle) {
-					Assert.assertTrue(b.isVisited());
-					Assert.assertTrue(b.isInPath());
+					Assert.assertTrue(solver.isBlockVisited(b));
+					Assert.assertTrue(solver.isBlockInSolution(b));
 				}
 			}
 		}

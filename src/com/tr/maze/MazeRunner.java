@@ -29,8 +29,9 @@ public class MazeRunner {
 									 };
 		//@formatter:on
 		Maze maze = MazeBuilder.buildMaze(data, 0, 2, 15, 14);
-		System.out.println(maze.solve(new MazeSolverDfs()));
-		System.out.println(maze.display());
+		IMazeSolver solver = new MazeSolverDfs();
+		System.out.println(maze.solve(solver));
+		System.out.println(maze.display(solver));
 
 	}
 }

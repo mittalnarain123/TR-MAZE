@@ -19,15 +19,6 @@ public interface IMaze {
 	public Block getEnd();
 
 	/**
-	 * Tries to find the neighbor aisle which has not been visited yet
-	 * 
-	 * @param block
-	 *            the current block
-	 * @return aisle if found, null otherwise
-	 */
-	public Block getNextAisle(Block block);
-
-	/**
 	 * Attempts to solve the maze with the selected algorithm
 	 * 
 	 * @param mazeSolver
@@ -40,5 +31,8 @@ public interface IMaze {
 	 * 
 	 * @return String
 	 */
-	public String display();
+	public String display(IMazeSolver solver);
+
+	public Block getBlock(int x, int y);
+
 }
