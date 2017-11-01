@@ -42,23 +42,23 @@ end: {15, 14}
 
 The program outputs: 
 ```
-true
-xXxxXx * xXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXx
-xXx    * xXx   xXx   xXx                     xXx
-xXx *  * xXx   xXx         xXx         xXx   xXx
-xXx * xXxxXx   xXx   xXxxXxxXxxXxxXx   xXx   xXx
-xXx *          xXx         xXx   xXx   xXx   xXx
-xXx * xXxxXxxXxxXxxXx   xXxxXx   xXxxXxxXx   xXx
-xXx *  *  *             xXx      xXx         xXx
-xXxxXxxXx * xXxxXxxXxxXxxXx   xXxxXxxXxxXxxXxxXx
-xXx *  *  *    xXx *  *  *    xXx   xXx      xXx
-xXx * xXxxXxxXxxXx * xXx *    xXx            xXx
-xXx *  *  *    xXx * xXx * xXxxXx   xXxxXxxXxxXx
-xXx   xXx *  *  *  * xXx *  *  *  *  *  *  * xXx
-xXx   xXxxXxxXxxXxxXxxXx *  * xXxxXxxXxxXx * xXx
-xXx   xXx                  xXxxXx      xXx * xXx
-xXx   xXx   xXxxXxxXx                  xXx * xXx
-xXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXx * xXx
+xxxxxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxx    * xxx   xxx   xxx                     xxx
+xxx *  * xxx   xxx         xxx         xxx   xxx
+xxx * xxxxxx   xxx   xxxxxxxxxxxxxxx   xxx   xxx
+xxx *          xxx         xxx   xxx   xxx   xxx
+xxx * xxxxxxxxxxxxxxx   xxxxxx   xxxxxxxxx   xxx
+xxx *  *  *             xxx      xxx         xxx
+xxxxxxxxx * xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxx
+xxx *  *  *    xxx *  *  *    xxx   xxx      xxx
+xxx * xxxxxxxxxxxx * xxx *    xxx            xxx
+xxx *  *  *    xxx * xxx * xxxxxx   xxxxxxxxxxxx
+xxx   xxx *  *  *  * xxx *  *  *  *  *  *  * xxx
+xxx   xxxxxxxxxxxxxxxxxx *  * xxxxxxxxxxxx * xxx
+xxx   xxx                  xxxxxx      xxx * xxx
+xxx   xxx   xxxxxxxxx                  xxx * xxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
+
 ```
 
 ## Executing the program
