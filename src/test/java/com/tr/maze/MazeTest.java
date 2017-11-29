@@ -1,4 +1,4 @@
-package com.tr.maze.test;
+package com.tr.maze;
 
 import junit.framework.Assert;
 
