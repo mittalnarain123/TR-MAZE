@@ -67,7 +67,15 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
 
 The program includes a maven plugin to directly execute thru maven command
 ```
-mvn exec:java
+mvn compile exec:java
+```
+
+### With Gradle
+
+To execute the program using gradle
+
+```
+./gradlew run
 ```
 
 ### Java class thru IDE/command line
@@ -81,6 +89,13 @@ Otherwise, the program can be executed thru Ide by running the main() method in 
 ```
 mvn test
 ```
+
+### With Gradle
+
+```
+./gradlew test
+```
+The Gradle test report will be generated in $project/build/reports/index.html
 
 ### Java class thru IDE/command line
 
