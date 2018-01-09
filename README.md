@@ -67,7 +67,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
 
 The program includes a maven plugin to directly execute thru maven command
 ```
-mvn compile exec:java
+./mvnw compile exec:java
 ```
 
 ### With Gradle
@@ -87,7 +87,7 @@ Otherwise, the program can be executed thru Ide by running the main() method in 
 ### With Maven
 
 ```
-mvn test
+./mvnw test
 ```
 
 ### With Gradle
