@@ -25,9 +25,6 @@ public class MazeSolverDfs implements IMazeSolver {
 	@Override
 	public boolean solve(Maze maze) {
 		this.maze = maze;
-		// this.stack = new ArrayDeque<>();
-		// maze.getStart().setVisited(true);
-		// maze.getStart().setInPath(true);
 		this.visitedBlocks.add(maze.getStart());
 		this.solutionBlocks.add(maze.getStart());
 		this.stack.push(maze.getStart());
@@ -38,19 +35,20 @@ public class MazeSolverDfs implements IMazeSolver {
 	public Block getNextTraversableAisle(Block block) {
 		int x = block.getX();
 		int y = block.getY();
+		Block next = null;
 		if (isValidAisle(x + 1, y)) {
-			return maze.getBlock(x + 1, y);
+			next = maze.getBlock(x + 1, y);
 		}
-		if (isValidAisle(x, y + 1)) {
-			return maze.getBlock(x, y + 1);
+		else if (isValidAisle(x, y + 1)) {
+			next = maze.getBlock(x, y + 1);
 		}
-		if (isValidAisle(x, y - 1)) {
-			return maze.getBlock(x, y - 1);
+		else if (isValidAisle(x, y - 1)) {
+			next = maze.getBlock(x, y - 1);
 		}
-		if (isValidAisle(x - 1, y)) {
-			return maze.getBlock(x - 1, y);
+		else if (isValidAisle(x - 1, y)) {
+			next = maze.getBlock(x - 1, y);
 		}
-		return null;
+		return next;
 	}
 
 	/**
@@ -80,16 +78,12 @@ public class MazeSolverDfs implements IMazeSolver {
 			return true;
 		} else {
 			Block next = getNextTraversableAisle(block);
-			// System.out.println("next:" + next);
 			if (next == null) {
-				// Dead end, chose alternate path
+				// Dead end, backtrack and chose alternate path
 				Block discard = stack.pop();
-				// discard.setInPath(false);
 				this.solutionBlocks.remove(discard);
 			} else {
 				// Traverse next block
-				// next.setVisited(true);
-				// next.setInPath(true);
 				this.solutionBlocks.add(next);
 				this.visitedBlocks.add(next);
 				stack.push(next);

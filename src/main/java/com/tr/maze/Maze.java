@@ -1,5 +1,8 @@
 package com.tr.maze;
 
+import java.util.Arrays;
+
+
 /**
  * Maze data structure. Consists of 2D array of blocks, a starting block and end block.
  * 
@@ -15,7 +18,6 @@ public class Maze implements IMaze {
 	private final Block end;
 
 	public Maze(Block[][] blocks, Block start, Block end) {
-		super();
 		this.blocks = blocks;
 		this.start = start;
 		this.end = end;
@@ -44,12 +46,10 @@ public class Maze implements IMaze {
 	@Override
 	public String display(IMazeSolver solver) {
 		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < blocks.length; i++) {
-			for (int j = 0; j < blocks[i].length; j++) {
-				builder.append(blocks[i][j].display(solver));
-			}
+		Arrays.stream(blocks).forEach(row -> {
+			Arrays.stream(row).forEach(col -> builder.append(col.display(solver)));
 			builder.append("\n");
-		}
+		});
 		return builder.toString();
 	}
 
