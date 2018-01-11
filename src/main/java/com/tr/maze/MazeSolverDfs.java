@@ -3,6 +3,7 @@ package com.tr.maze;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -69,27 +70,35 @@ public class MazeSolverDfs implements IMazeSolver {
 	}
 
 	private boolean solveDfs() {
-		Block block = stack.peekFirst();
-		if (block == null) {
+		Optional<Block> block = Optional.ofNullable(stack.peekFirst());
+		if (!block.isPresent()) {
 			// stack empty and not reached the finish yet; no solution
 			return false;
-		} else if (block.equals(maze.getEnd())) {
+		} else if (block.get().equals(maze.getEnd())) {
 			// reached finish, exit the program
 			return true;
 		} else {
-			Block next = getNextTraversableAisle(block);
-			if (next == null) {
+			Optional<Block> next = block.map(this::getNextTraversableAisle);
+			if (!next.isPresent()) {
 				// Dead end, backtrack and chose alternate path
-				Block discard = stack.pop();
-				this.solutionBlocks.remove(discard);
+				backTrack();
 			} else {
 				// Traverse next block
-				this.solutionBlocks.add(next);
-				this.visitedBlocks.add(next);
-				stack.push(next);
+				traverseNextBlock(next.get());
 			}
 		}
 		return solveDfs();
+	}
+
+	private Optional backTrack(){
+		this.solutionBlocks.remove(stack.pop());
+		return Optional.empty();
+	}
+
+	private void traverseNextBlock(Block next){
+		this.solutionBlocks.add(next);
+		this.visitedBlocks.add(next);
+		stack.push(next);
 	}
 
 	@Override
