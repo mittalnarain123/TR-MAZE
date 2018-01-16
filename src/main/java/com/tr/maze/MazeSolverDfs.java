@@ -33,7 +33,7 @@ public class MazeSolverDfs implements IMazeSolver {
 	}
 
 	@Override
-	public Block getNextTraversableAisle(Block block) {
+	public Block getNextTraversalAisle(Block block) {
 		int x = block.getX();
 		int y = block.getY();
 		Block next = null;
@@ -74,17 +74,19 @@ public class MazeSolverDfs implements IMazeSolver {
 		if (!block.isPresent()) {
 			// stack empty and not reached the finish yet; no solution
 			return false;
-		} else if (block.get().equals(maze.getEnd())) {
-			// reached finish, exit the program
-			return true;
 		} else {
-			Optional<Block> next = block.map(this::getNextTraversableAisle);
-			if (!next.isPresent()) {
-				// Dead end, backtrack and chose alternate path
-				backTrack();
+			if (block.get().equals(maze.getEnd())) {
+				// reached finish, exit the program
+				return true;
 			} else {
-				// Traverse next block
-				traverseNextBlock(next.get());
+				Optional<Block> next = block.map(this::getNextTraversalAisle);
+				if (next.isPresent()) {
+					// Traverse next block
+					traverseNextBlock(next.get());
+				} else {
+					// Dead end, backtrack and chose alternate path
+					backTrack();
+				}
 			}
 		}
 		return solveDfs();
