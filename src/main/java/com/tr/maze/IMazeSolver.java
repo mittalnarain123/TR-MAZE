@@ -17,10 +17,22 @@ public interface IMazeSolver {
 	 *            the current block
 	 * @return aisle if found, null otherwise
 	 */
-	Block getNextTraversableAisle(Block block);
+	Block getNextTraversalAisle(Block block);
 
+
+	/**
+	 * @param block
+	 *
+	 * @return true if the block is part of the solution path/ false otherwise
+	 */
 	boolean isBlockInSolution(Block block);
 
+
+	/**
+	 * @param block
+	 *
+	 * @return true if the block has been visited in the maze/ false otherwise
+	 */
 	boolean isBlockVisited(Block block);
 
 }

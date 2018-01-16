@@ -3,6 +3,7 @@ package com.tr.maze;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -25,9 +26,6 @@ public class MazeSolverDfs implements IMazeSolver {
 	@Override
 	public boolean solve(Maze maze) {
 		this.maze = maze;
-		// this.stack = new ArrayDeque<>();
-		// maze.getStart().setVisited(true);
-		// maze.getStart().setInPath(true);
 		this.visitedBlocks.add(maze.getStart());
 		this.solutionBlocks.add(maze.getStart());
 		this.stack.push(maze.getStart());
@@ -35,22 +33,23 @@ public class MazeSolverDfs implements IMazeSolver {
 	}
 
 	@Override
-	public Block getNextTraversableAisle(Block block) {
+	public Block getNextTraversalAisle(Block block) {
 		int x = block.getX();
 		int y = block.getY();
+		Block next = null;
 		if (isValidAisle(x + 1, y)) {
-			return maze.getBlock(x + 1, y);
+			next = maze.getBlock(x + 1, y);
 		}
-		if (isValidAisle(x, y + 1)) {
-			return maze.getBlock(x, y + 1);
+		else if (isValidAisle(x, y + 1)) {
+			next = maze.getBlock(x, y + 1);
 		}
-		if (isValidAisle(x, y - 1)) {
-			return maze.getBlock(x, y - 1);
+		else if (isValidAisle(x, y - 1)) {
+			next = maze.getBlock(x, y - 1);
 		}
-		if (isValidAisle(x - 1, y)) {
-			return maze.getBlock(x - 1, y);
+		else if (isValidAisle(x - 1, y)) {
+			next = maze.getBlock(x - 1, y);
 		}
-		return null;
+		return next;
 	}
 
 	/**
@@ -71,31 +70,37 @@ public class MazeSolverDfs implements IMazeSolver {
 	}
 
 	private boolean solveDfs() {
-		Block block = stack.peekFirst();
-		if (block == null) {
+		Optional<Block> block = Optional.ofNullable(stack.peekFirst());
+		if (!block.isPresent()) {
 			// stack empty and not reached the finish yet; no solution
 			return false;
-		} else if (block.equals(maze.getEnd())) {
-			// reached finish, exit the program
-			return true;
 		} else {
-			Block next = getNextTraversableAisle(block);
-			// System.out.println("next:" + next);
-			if (next == null) {
-				// Dead end, chose alternate path
-				Block discard = stack.pop();
-				// discard.setInPath(false);
-				this.solutionBlocks.remove(discard);
+			if (block.get().equals(maze.getEnd())) {
+				// reached finish, exit the program
+				return true;
 			} else {
-				// Traverse next block
-				// next.setVisited(true);
-				// next.setInPath(true);
-				this.solutionBlocks.add(next);
-				this.visitedBlocks.add(next);
-				stack.push(next);
+				Optional<Block> next = block.map(this::getNextTraversalAisle);
+				if (next.isPresent()) {
+					// Traverse next block
+					traverseNextBlock(next.get());
+				} else {
+					// Dead end, backtrack and chose alternate path
+					backTrack();
+				}
 			}
 		}
 		return solveDfs();
+	}
+
+	private Optional backTrack(){
+		this.solutionBlocks.remove(stack.pop());
+		return Optional.empty();
+	}
+
+	private void traverseNextBlock(Block next){
+		this.solutionBlocks.add(next);
+		this.visitedBlocks.add(next);
+		stack.push(next);
 	}
 
 	@Override
