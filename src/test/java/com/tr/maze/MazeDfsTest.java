@@ -1,16 +1,7 @@
 package com.tr.maze;
 
-
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.tr.maze.Aisle;
-import com.tr.maze.Block;
-import com.tr.maze.IMazeSolver;
-import com.tr.maze.Maze;
-import com.tr.maze.MazeBuilder;
-import com.tr.maze.MazeSolverDfs;
-import com.tr.maze.Wall;
 
 /**
  * JUnit to test the Maze
@@ -18,47 +9,47 @@ import com.tr.maze.Wall;
  * @author Narain Mittal
  * 
  */
-public class MazeTest {
+public class MazeDfsTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInsufficientMazeDataException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs());
+		maze.solve(new MazeSolverDfs(maze));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeDataException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 2 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs());
+		maze.solve(new MazeSolverDfs(maze));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeDataException2() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs());
+		maze.solve(new MazeSolverDfs(maze));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeStartException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 5, 5, 3, 1);
-		maze.solve(new MazeSolverDfs());
+		maze.solve(new MazeSolverDfs(maze));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeEndException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 5, 5);
-		maze.solve(new MazeSolverDfs());
+		maze.solve(new MazeSolverDfs(maze));
 	}
 
 	@Test
 	public void testMazeSolution() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		IMazeSolver solver = new MazeSolverDfs();
+		IMazeSolver solver = new MazeSolverDfs(maze);
 		Assert.assertTrue(maze.solve(solver));
 		Block[][] blocks = maze.getBlocks();
 		for (Block[] bl : blocks) {
@@ -78,7 +69,7 @@ public class MazeTest {
 	public void testMazeNoSolution() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 2);
-		Assert.assertFalse(maze.solve(new MazeSolverDfs()));
+		Assert.assertFalse(maze.solve(new MazeSolverDfs(maze)));
 	}
 
 }

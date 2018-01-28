@@ -8,17 +8,16 @@ package com.tr.maze;
  */
 public interface IMazeSolver {
 
+	/**
+	 * @param maze
+	 * @return
+	 */
 	boolean solve(Maze maze);
 
 	/**
-	 * Tries to find the neighbor aisle which has not been visited yet
-	 * 
-	 * @param block
-	 *            the current block
-	 * @return aisle if found, null otherwise
+	 * @return
 	 */
-	Block getNextTraversalAisle(Block block);
-
+	long solutionPathSize();
 
 	/**
 	 * @param block
