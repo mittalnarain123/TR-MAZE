@@ -1,6 +1,8 @@
 # TR-MAZE
 
-This is a Java project to implement the Maze Problem. A maze consists of Walls and Aisles. The program Uses Depth First Search algorithm to find a path from start to finish traversing thru the aisles.
+This is a Java project to implement the Maze Problem. A maze consists of Walls and Aisles. The program Uses Depth First Search and Breadth First Search algorithm to find a path from start to finish traversing through the aisles.
+
+_The BFS algorithm also finds the shortest solution path_
 
 ## Getting Started
 
@@ -42,6 +44,8 @@ end: {15, 14}
 
 The program outputs: 
 ```
+-------------DFS---------------
+true
 xxxxxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxx    * xxx   xxx   xxx                     xxx
 xxx *  * xxx   xxx         xxx         xxx   xxx
@@ -58,6 +62,29 @@ xxx   xxxxxxxxxxxxxxxxxx *  * xxxxxxxxxxxx * xxx
 xxx   xxx                  xxxxxx      xxx * xxx
 xxx   xxx   xxxxxxxxx                  xxx * xxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
+
+Solution path size: 42
+
+-------------BFS---------------
+true
+xxxxxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxx    * xxx   xxx   xxx                     xxx
+xxx *  * xxx   xxx         xxx         xxx   xxx
+xxx * xxxxxx   xxx   xxxxxxxxxxxxxxx   xxx   xxx
+xxx *          xxx         xxx   xxx   xxx   xxx
+xxx * xxxxxxxxxxxxxxx   xxxxxx   xxxxxxxxx   xxx
+xxx *  *  *             xxx      xxx         xxx
+xxxxxxxxx * xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxx
+xxx *  *  *    xxx *  *  *    xxx   xxx      xxx
+xxx * xxxxxxxxxxxx * xxx *    xxx            xxx
+xxx *  *  *    xxx * xxx * xxxxxx   xxxxxxxxxxxx
+xxx   xxx *  *  *  * xxx *  *  *  *  *  *  * xxx
+xxx   xxxxxxxxxxxxxxxxxx      xxxxxxxxxxxx * xxx
+xxx   xxx                  xxxxxx      xxx * xxx
+xxx   xxx   xxxxxxxxx                  xxx * xxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
+
+Solution path size: 40
 
 ```
 
@@ -95,13 +122,8 @@ Otherwise, the program can be executed thru Ide by running the main() method in 
 ```
 ./gradlew test
 ```
-The Gradle test report will be generated in $project/build/reports/index.html
+_The Gradle test report will be generated in $project/build/reports/index.html_
 
-### Java class thru IDE/command line
-
-```
-MazeTest.java
-```
 
 ## License
 
