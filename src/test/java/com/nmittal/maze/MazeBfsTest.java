@@ -2,10 +2,18 @@
  * Copyright 2018 Thomson Reuters/ONESOURCE. All rights reserved.
  */
 
-package com.tr.maze;
+package com.nmittal.maze;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.nmittal.maze.Aisle;
+import com.nmittal.maze.Block;
+import com.nmittal.maze.IMazeSolver;
+import com.nmittal.maze.Maze;
+import com.nmittal.maze.MazeBuilder;
+import com.nmittal.maze.MazeSolverBfs;
+import com.nmittal.maze.Wall;
 
 /**
  * JUnit to test the Maze

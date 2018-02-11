@@ -1,4 +1,4 @@
-package com.tr.maze;
+package com.nmittal.maze;
 
 /**
  * Test program to run the Maze problem

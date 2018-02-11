@@ -2,7 +2,7 @@
  * Copyright 2018 Thomson Reuters/ONESOURCE. All rights reserved.
  */
 
-package com.tr.maze;
+package com.nmittal.maze;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;

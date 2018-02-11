@@ -1,4 +1,4 @@
-package com.tr.maze;
+package com.nmittal.maze;
 
 /**
  * Interface for any algorithm implementation for solving Maze problem

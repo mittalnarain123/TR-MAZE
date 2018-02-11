@@ -1,4 +1,4 @@
-package com.tr.maze;
+package com.nmittal.maze;
 
 import java.util.*;
 
