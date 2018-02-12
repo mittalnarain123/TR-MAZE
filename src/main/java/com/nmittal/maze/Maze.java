@@ -25,7 +25,7 @@ public class Maze implements IMaze {
 
 	@Override
 	public boolean solve(IMazeSolver mazeSolver) {
-		return mazeSolver.solve(this);
+		return mazeSolver.solve();
 
 	}
 

@@ -1,5 +1,7 @@
 package com.nmittal.maze;
 
+import java.util.Set;
+
 /**
  * Interface for any algorithm implementation for solving Maze problem
  * 
@@ -9,10 +11,9 @@ package com.nmittal.maze;
 public interface IMazeSolver {
 
 	/**
-	 * @param maze
 	 * @return
 	 */
-	boolean solve(Maze maze);
+	boolean solve();
 
 	/**
 	 * @return
@@ -26,12 +27,13 @@ public interface IMazeSolver {
 	 */
 	boolean isBlockInSolution(Block block);
 
-
 	/**
 	 * @param block
 	 *
 	 * @return true if the block has been visited in the maze/ false otherwise
 	 */
 	boolean isBlockVisited(Block block);
+
+	Set<Block> getSolutionPath();
 
 }
