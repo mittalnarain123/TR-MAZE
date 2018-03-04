@@ -86,7 +86,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
 
 Solution path size: 40
 
-
+```
 
 ## Executing the program
 
