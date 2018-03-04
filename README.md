@@ -86,20 +86,11 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
 
 Solution path size: 40
 
-```
+
 
 ## Executing the program
 
-### With Maven
-
-The program includes a maven plugin to directly execute thru maven command
-```
-./mvnw compile exec:java
-```
-
 ### With Gradle
-
-To execute the program using gradle
 
 ```
 ./gradlew run
@@ -111,19 +102,18 @@ Otherwise, the program can be executed thru Ide by running the main() method in 
 
 ## Running the tests
 
-### With Maven
-
-```
-./mvnw test
-```
-
-### With Gradle
-
 ```
 ./gradlew test
 ```
 _The Gradle test report will be generated in $project/build/reports/index.html_
 
+## Installation
+
+To install the project as JAR into local maven repository to be used by other projects
+
+```
+./gradlew install
+```
 
 ## License
 
