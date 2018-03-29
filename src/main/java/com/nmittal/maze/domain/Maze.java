@@ -1,6 +1,8 @@
-package com.nmittal.maze;
+package com.nmittal.maze.domain;
 
 import java.util.Arrays;
+
+import com.nmittal.maze.solve.IMazeSolver;
 
 
 /**

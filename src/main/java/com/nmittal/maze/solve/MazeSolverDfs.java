@@ -1,4 +1,4 @@
-package com.nmittal.maze;
+package com.nmittal.maze.solve;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+
+import com.nmittal.maze.domain.Aisle;
+import com.nmittal.maze.domain.Block;
+import com.nmittal.maze.domain.IMaze;
 
 /**
  * Applies the DFS algirithm to solve the Maze. Uses stack data structure to

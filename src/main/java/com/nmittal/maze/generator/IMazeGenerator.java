@@ -1,6 +1,6 @@
 package com.nmittal.maze.generator;
 
-import com.nmittal.maze.IMaze;
+import com.nmittal.maze.domain.IMaze;
 
 public interface IMazeGenerator {
 

@@ -7,7 +7,7 @@ version = '1.2.0'
 
 description = """Maze Project"""
 
-mainClassName = 'com.nmittal.maze.MazeRunner'
+mainClassName = 'com.nmittal.maze.util.MazeRunner'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

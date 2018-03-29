@@ -13,16 +13,18 @@ import org.apache.commons.lang3.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nmittal.maze.Aisle;
-import com.nmittal.maze.Block;
-import com.nmittal.maze.IMaze;
-import com.nmittal.maze.Maze;
-import com.nmittal.maze.Wall;
+import com.nmittal.maze.domain.Aisle;
+import com.nmittal.maze.domain.Block;
 import com.nmittal.maze.domain.Direction;
+import com.nmittal.maze.domain.IMaze;
+import com.nmittal.maze.domain.Maze;
+import com.nmittal.maze.domain.Wall;
 
 public class MazeGeneratorRecursive implements IMazeGenerator {
 
 	final Logger LOG = LoggerFactory.getLogger(MazeGeneratorRecursive.class);
+	final static int MIN_GRID = 4;
+	final static int MAX_GRID = 100;
 
 	private Block[][] blocks;
 	private Set<Block> visited = new HashSet<>();
@@ -32,15 +34,16 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 	public IMaze generateMaze(int gridRows, int gridColumns) {
 		if (!validate(gridRows, gridColumns)) {
 			throw new IllegalArgumentException(
-					String.format("Invalid grid values - must be even numbers > 4: %s, %s", gridRows, gridColumns));
+					String.format("Invalid grid values : %s, %s - must be even numbers greater than %s ", gridRows,
+							gridColumns, MIN_GRID));
 		}
 		blocks = createMazeGrid(gridRows, gridColumns);
 
 		LOG.info("---------Maze grid-----------");
-		LOG.info(new Maze(blocks, null, null).display(null));
+		LOG.info("\n" + new Maze(blocks, null, null).display(null));
 
-		Block start = convertToAisle(1, 1);
-		Block end = convertToAisle(gridRows - 1, gridColumns - 1);
+		Block start = convertToAisle(0, 0);
+		Block end = convertToAisle(gridRows, gridColumns);
 
 		stack.push(start);
 		visited.add(start);
@@ -50,7 +53,7 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 		IMaze maze = new Maze(blocks, start, end);
 
 		LOG.info("---------Maze generated-----------");
-		LOG.info(maze.display(null));
+		LOG.info("\n" + maze.display(null));
 		return maze;
 	}
 
@@ -149,7 +152,7 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 			Block[][] blocks = new Block[gridRows + 1][gridColumns + 1];
 			for (int i = 0; i <= gridRows; i++) {
 				for (int j = 0; j <= gridColumns; j++) {
-					if (i % 2 == 0 || j % 2 == 0) {
+					if (i % 2 == 1 || j % 2 == 1) {
 						blocks[i][j] = new Wall(i, j);
 					} else {
 						blocks[i][j] = new Aisle(i, j);
@@ -178,8 +181,7 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 		try {
 			return blocks[x][y];
 		} catch (ArrayIndexOutOfBoundsException a) {
-			// throw new IllegalArgumentException(String.format("getBlock: Invalid indices
-			// %s , %s", x, y));
+			LOG.error(String.format("getBlock: Invalid block requested: %s, %s", x, y));
 			return null;
 		}
 	}
@@ -190,7 +192,8 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 
 	@Override
 	public boolean validate(int gridRows, int gridColumns) {
-		if (gridRows > 4 && gridColumns > 4 && gridRows % 2 == 0 && gridColumns % 2 == 0) {
+		if (gridRows > MIN_GRID && gridColumns > MIN_GRID && gridRows <= MAX_GRID && gridColumns <= MAX_GRID
+				&& gridRows % 2 == 0 && gridColumns % 2 == 0) {
 			return true;
 		}
 		return false;

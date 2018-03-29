@@ -1,4 +1,9 @@
-package com.nmittal.maze;
+package com.nmittal.maze.util;
+
+import com.nmittal.maze.domain.IMaze;
+import com.nmittal.maze.solve.IMazeSolver;
+import com.nmittal.maze.solve.MazeSolverBfs;
+import com.nmittal.maze.solve.MazeSolverDfs;
 
 /**
  * Test program to run the Maze problem

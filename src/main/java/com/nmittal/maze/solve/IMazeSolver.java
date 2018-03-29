@@ -1,6 +1,8 @@
-package com.nmittal.maze;
+package com.nmittal.maze.solve;
 
 import java.util.Set;
+
+import com.nmittal.maze.domain.Block;
 
 /**
  * Interface for any algorithm implementation for solving Maze problem
