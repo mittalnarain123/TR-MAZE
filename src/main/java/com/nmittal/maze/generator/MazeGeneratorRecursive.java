@@ -39,8 +39,8 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 		}
 		blocks = createMazeGrid(gridRows, gridColumns);
 
-		LOG.info("---------Maze grid-----------");
-		LOG.info("\n" + new Maze(blocks, null, null).display(null));
+		// LOG.info("---------Maze grid-----------");
+		// LOG.info("\n" + new Maze(blocks, null, null).display(null));
 
 		Block start = convertToAisle(0, 0);
 		Block end = convertToAisle(gridRows, gridColumns);
