@@ -1,92 +1,17 @@
 # TR-MAZE
+This is a Java project to implement the Maze Problem. A maze consists of Walls and Aisles. There are 2 parts in the project.
 
-This is a Java project to implement the Maze Problem. A maze consists of Walls and Aisles. The program Uses Depth First Search and Breadth First Search algorithm to find a path from start to finish traversing through the aisles.
+## Maze Generator
+The program generates a maze for an input grid definition, i.e. # of rows & columns. Algorithm for generation
+- Depth First Search (Backtracking)
+
+## Maze Solution
+The program tries to solve the input maze by trying to find a path from start to end. Algorithms available for solution:
+- Depth First Search (Recursive Backtracking)
+- Breadth First Search
 
 _The BFS algorithm also finds the shortest solution path_
 
-## Getting Started
-
-The input data for the program includes: 
-
-- Maze definition in a 2D array representation (0 for Aisle, 1 for Wall), 
-- Maze entrance point
-- Maze exit point
-
-Output:
-- True if a path available from start to end
-- False if no path available from start to end
-- There is also a display() method which prints the pictorial representation of the Maze along with the selected solution. 
-
-e.g.
-```
-for the input maze definition:
-
-	{1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1}, 
-	{1,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1}, 
-	{1,0,0,1,0,1,0,0,0,1,0,0,0,1,0,1}, 
-	{1,0,1,1,0,1,0,1,1,1,1,1,0,1,0,1}, 
-	{1,0,0,0,0,1,0,0,0,1,0,1,0,1,0,1}, 
-	{1,0,1,1,1,1,1,0,1,1,0,1,1,1,0,1}, 
-	{1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1}, 
-	{1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1}, 
-	{1,0,0,0,0,1,0,0,0,0,1,0,1,0,0,1}, 
-	{1,0,1,1,1,1,0,1,0,0,1,0,0,0,0,1}, 
-	{1,0,0,0,0,1,0,1,0,1,1,0,1,1,1,1}, 
-	{1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1}, 
-	{1,0,1,1,1,1,1,1,0,0,1,1,1,1,0,1}, 
-	{1,0,1,0,0,0,0,0,0,1,1,0,0,1,0,1}, 
-	{1,0,1,0,1,1,1,0,0,0,0,0,0,1,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1}}
-
-start: {0, 2}
-end: {15, 14}
-```
-
-The program outputs: 
-```
--------------DFS---------------
-true
-xxxxxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxx    * xxx   xxx   xxx                     xxx
-xxx *  * xxx   xxx         xxx         xxx   xxx
-xxx * xxxxxx   xxx   xxxxxxxxxxxxxxx   xxx   xxx
-xxx *          xxx         xxx   xxx   xxx   xxx
-xxx * xxxxxxxxxxxxxxx   xxxxxx   xxxxxxxxx   xxx
-xxx *  *  *             xxx      xxx         xxx
-xxxxxxxxx * xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxx
-xxx *  *  *    xxx *  *  *    xxx   xxx      xxx
-xxx * xxxxxxxxxxxx * xxx *    xxx            xxx
-xxx *  *  *    xxx * xxx * xxxxxx   xxxxxxxxxxxx
-xxx   xxx *  *  *  * xxx *  *  *  *  *  *  * xxx
-xxx   xxxxxxxxxxxxxxxxxx *  * xxxxxxxxxxxx * xxx
-xxx   xxx                  xxxxxx      xxx * xxx
-xxx   xxx   xxxxxxxxx                  xxx * xxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
-
-Solution path size: 42
-
--------------BFS---------------
-true
-xxxxxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxx    * xxx   xxx   xxx                     xxx
-xxx *  * xxx   xxx         xxx         xxx   xxx
-xxx * xxxxxx   xxx   xxxxxxxxxxxxxxx   xxx   xxx
-xxx *          xxx         xxx   xxx   xxx   xxx
-xxx * xxxxxxxxxxxxxxx   xxxxxx   xxxxxxxxx   xxx
-xxx *  *  *             xxx      xxx         xxx
-xxxxxxxxx * xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxx
-xxx *  *  *    xxx *  *  *    xxx   xxx      xxx
-xxx * xxxxxxxxxxxx * xxx *    xxx            xxx
-xxx *  *  *    xxx * xxx * xxxxxx   xxxxxxxxxxxx
-xxx   xxx *  *  *  * xxx *  *  *  *  *  *  * xxx
-xxx   xxxxxxxxxxxxxxxxxx      xxxxxxxxxxxx * xxx
-xxx   xxx                  xxxxxx      xxx * xxx
-xxx   xxx   xxxxxxxxx                  xxx * xxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
-
-Solution path size: 40
-
-```
 
 ## Executing the program
 
@@ -113,6 +38,72 @@ To install the project as JAR into local maven repository to be used by other pr
 
 ```
 ./gradlew install
+```
+
+## Sample Run
+
+The sample (MazeRunner.java) includes a test run on the project. It tries to first generate a 20*20 maze and then solves them with both DFS and BFS algorithms. 
+
+The output looks something like below (although will change on every execution as the generation is randomized)
+
+
+```
+
+
+-------------DFS---------------
+true
+ * xxx         xxx                   *  *  * xxx
+ * xxx   xxx   xxx   xxxxxxxxxxxxxxx * xxx * xxxxxxxxx   xxxxxx
+ * xxx   xxx         xxx *  *  *  *  * xxx *  *  * xxx
+ * xxxxxxxxxxxxxxxxxxxxx * xxxxxxxxxxxxxxxxxxxxx * xxxxxxxxx
+ *  *  *  *  *  *  * xxx * xxx               xxx *  *  * xxx
+xxxxxxxxxxxxxxxxxx * xxx * xxx   xxxxxxxxxxxxxxxxxxxxx * xxx
+   xxx *  *  * xxx *  *  * xxx *  *  *  *  *       xxx *  *  *
+   xxx * xxx * xxxxxxxxxxxxxxx * xxxxxxxxx * xxxxxxxxxxxxxxx *
+ *  *  * xxx *  *  *  *  * xxx * xxx *  *  * xxx *  *  *  *  *
+ * xxxxxxxxxxxxxxxxxxxxx * xxx * xxx * xxx   xxx * xxxxxxxxxxxx
+ *  *  * xxx *  *  * xxx *  *  * xxx * xxx   xxx * xxx
+xxxxxx * xxx * xxx * xxxxxxxxxxxxxxx * xxxxxxxxx * xxx   xxxxxx
+ *  *  * xxx * xxx * xxx *  *  * xxx * xxx *  *  * xxx
+ * xxxxxxxxx * xxx * xxx * xxx * xxx * xxx * xxxxxxxxxxxxxxx
+ * xxx *  *  * xxx *  *  * xxx *  *  * xxx *  *  *  *  * xxx
+ * xxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
+ * xxx *  *  *  *  *  *  *  *  *  *  *  *  *  *  * xxx * xxx
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx * xxx
+ * xxx *  *  *  *  *  *  *  *  *  *  * xxx   xxx *  *  * xxx
+ * xxx * xxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx   xxxxxxxxxxxxxxx
+ *  *  * xxx                         *  *  *  *  *  *  *  *  *
+
+Solution path size: 177
+Time taken 2
+-------------BFS---------------
+true
+ * xxx         xxx                   *  *  * xxx
+ * xxx   xxx   xxx   xxxxxxxxxxxxxxx * xxx * xxxxxxxxx   xxxxxx
+ * xxx   xxx         xxx *  *  *  *  * xxx *  *  * xxx
+ * xxxxxxxxxxxxxxxxxxxxx * xxxxxxxxxxxxxxxxxxxxx * xxxxxxxxx
+ *  *  *  *  *  *  * xxx * xxx               xxx *  *  * xxx
+xxxxxxxxxxxxxxxxxx * xxx * xxx   xxxxxxxxxxxxxxxxxxxxx * xxx
+   xxx *  *  * xxx *  *  * xxx *  *  *  *  *       xxx *  *  *
+   xxx * xxx * xxxxxxxxxxxxxxx * xxxxxxxxx * xxxxxxxxxxxxxxx *
+ *  *  * xxx *  *  *  *  * xxx * xxx *  *  * xxx *  *  *  *  *
+ * xxxxxxxxxxxxxxxxxxxxx * xxx * xxx * xxx   xxx * xxxxxxxxxxxx
+ *  *  * xxx *  *  * xxx *  *  * xxx * xxx   xxx * xxx
+xxxxxx * xxx * xxx * xxxxxxxxxxxxxxx * xxxxxxxxx * xxx   xxxxxx
+ *  *  * xxx * xxx * xxx *  *  * xxx * xxx *  *  * xxx
+ * xxxxxxxxx * xxx * xxx * xxx * xxx * xxx * xxxxxxxxxxxxxxx
+ * xxx *  *  * xxx *  *  * xxx *  *  * xxx *  *  *  *  * xxx
+ * xxx * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx
+ * xxx *  *  *  *  *  *  *  *  *  *  *  *  *  *  * xxx * xxx
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx * xxx
+ * xxx *  *  *  *  *  *  *  *  *  *  * xxx   xxx *  *  * xxx
+ * xxx * xxxxxxxxxxxxxxxxxxxxxxxxxxx * xxx   xxxxxxxxxxxxxxx
+ *  *  * xxx                         *  *  *  *  *  *  *  *  *
+
+Solution path size: 177
+Time taken 1
+
+
 ```
 
 ## License
