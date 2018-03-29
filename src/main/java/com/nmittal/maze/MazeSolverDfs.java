@@ -92,16 +92,11 @@ public class MazeSolverDfs implements IMazeSolver {
 					traverseNextBlock(next.get());
 				} else {
 					// Dead end, backtrack and chose alternate path
-					backTrack();
+					this.solutionBlocks.remove(stack.pop());
 				}
 			}
 		}
 		return solveDfs();
-	}
-
-	private Optional backTrack() {
-		this.solutionBlocks.remove(stack.pop());
-		return Optional.empty();
 	}
 
 	private void traverseNextBlock(Block next) {
