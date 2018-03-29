@@ -1,6 +1,6 @@
 package com.nmittal.maze.generator;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -9,12 +9,17 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.nmittal.maze.domain.IMaze;
+import com.nmittal.maze.solve.IMazeSolver;
 import com.nmittal.maze.solve.MazeSolverBfs;
 import com.nmittal.maze.solve.MazeSolverDfs;
 
 public class MazeGeneratorRecursiveTest {
+
+	private static final Logger LOG = LoggerFactory.getLogger(MazeGeneratorRecursiveTest.class);
 
 	private IMazeGenerator generator;
 
@@ -71,8 +76,18 @@ public class MazeGeneratorRecursiveTest {
 		int grid = 20;
 		try {
 			IMaze maze = generator.generateMaze(grid, grid);
-			assertThat(maze.solve(new MazeSolverBfs(maze)), is(true));
-			assertThat(maze.solve(new MazeSolverDfs(maze)), is(true));
+			IMazeSolver bfs = new MazeSolverBfs(maze);
+			IMazeSolver dfs = new MazeSolverDfs(maze);
+
+			assertThat(bfs.solve(), equalTo(true));
+			assertThat(dfs.solve(), equalTo(true));
+
+			LOG.info("BFS solution");
+			LOG.info("\n" + maze.display(bfs));
+			LOG.info("DFS solution");
+			LOG.info("\n" + maze.display(dfs));
+			maze.display(dfs);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("should not throw error in maze solution");

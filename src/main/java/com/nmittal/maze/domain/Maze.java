@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import com.nmittal.maze.solve.IMazeSolver;
 
-
 /**
- * Maze data structure. Consists of 2D array of blocks, a starting block and end block.
+ * Maze data structure. Consists of 2D array of blocks, a starting block and end
+ * block.
  * 
  * @author Narain Mittal
  * 
@@ -23,12 +23,6 @@ public class Maze implements IMaze {
 		this.blocks = blocks;
 		this.start = start;
 		this.end = end;
-	}
-
-	@Override
-	public boolean solve(IMazeSolver mazeSolver) {
-		return mazeSolver.solve();
-
 	}
 
 	@Override

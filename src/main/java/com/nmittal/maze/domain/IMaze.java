@@ -21,14 +21,6 @@ public interface IMaze {
 	public Block getEnd();
 
 	/**
-	 * Attempts to solve the maze with the selected algorithm
-	 * 
-	 * @param mazeSolver
-	 * @return
-	 */
-	public boolean solve(IMazeSolver mazeSolver);
-
-	/**
 	 * Returns String representation of Maze
 	 * 
 	 * @return String

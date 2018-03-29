@@ -29,13 +29,13 @@ public class MazeRunner {
 
 		System.out.println("-------------DFS---------------");
 		IMazeSolver solver = new MazeSolverDfs(maze);
-		System.out.println(maze.solve(solver));
+		System.out.println(solver.solve());
 		System.out.println(maze.display(solver));
 		System.out.println("Solution path size: " + solver.solutionPathSize());
 
 		System.out.println("-------------BFS---------------");
 		solver = new MazeSolverBfs(maze);
-		System.out.println(maze.solve(solver));
+		System.out.println(solver.solve());
 		System.out.println(maze.display(solver));
 		System.out.println("Solution path size: " + solver.solutionPathSize());
 
