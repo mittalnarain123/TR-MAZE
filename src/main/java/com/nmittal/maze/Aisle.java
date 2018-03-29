@@ -14,7 +14,7 @@ public class Aisle extends Block {
 
 	@Override
 	public String display(IMazeSolver solver) {
-		return solver.isBlockInSolution(this) ? " * " : "   ";
+		return (solver != null && solver.isBlockInSolution(this)) ? " * " : "   ";
 	}
 
 }

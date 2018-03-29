@@ -30,19 +30,39 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 
 	@Override
 	public IMaze generateMaze(int gridRows, int gridColumns) {
+		if (!validate(gridRows, gridColumns)) {
+			throw new IllegalArgumentException(
+					String.format("Invalid grid values - must be even numbers > 4: %s, %s", gridRows, gridColumns));
+		}
 		blocks = createMazeGrid(gridRows, gridColumns);
 
+		LOG.info("---------Maze grid-----------");
+		LOG.info(new Maze(blocks, null, null).display(null));
+
 		Block start = convertToAisle(1, 1);
-		Block end = convertToAisle(gridRows - 1, gridColumns - 2);
+		Block end = convertToAisle(gridRows - 1, gridColumns - 1);
+
 		stack.push(start);
 		visited.add(start);
-		return new Maze(blocks, start, end);
+
+		buildMaze();
+
+		IMaze maze = new Maze(blocks, start, end);
+
+		LOG.info("---------Maze generated-----------");
+		LOG.info(maze.display(null));
+		return maze;
 	}
 
 	public void buildMaze() {
 		Block current = stack.peek();
 
 		while (CollectionUtils.isNotEmpty(stack)) {
+			if (null == current) {
+				LOG.info("buildMaze: Null element encountered");
+				current = stack.pop();
+				continue;
+			}
 			// find all neighbors
 			List<Block> neighbours = findNeighbours(current);
 
@@ -71,9 +91,10 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 			convertToAisle(current.getX(), (current.getY() + newBlock.getY()) / 2);
 		} else if (current.getY() == newBlock.getY()) {
 			convertToAisle((current.getX() + newBlock.getX()) / 2, current.getY());
+		} else {
+			LOG.error(String.format("breakWall: Invalid block selected: %s, %s", current, newBlock));
+			throw new IllegalArgumentException("breakWall: Invalid block selected");
 		}
-		LOG.error(String.format("breakWall: Invalid block selected: %s, %s", current, newBlock));
-		throw new IllegalArgumentException("breakWall: Invalid block selected");
 	}
 
 	public List<Block> findNeighbours(Block block) {
@@ -125,9 +146,9 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 	public Block[][] createMazeGrid(int gridRows, int gridColumns) {
 
 		try {
-			Block[][] blocks = new Block[gridRows][gridColumns];
-			for (int i = 0; i < gridRows; i++) {
-				for (int j = 0; j < gridColumns; j++) {
+			Block[][] blocks = new Block[gridRows + 1][gridColumns + 1];
+			for (int i = 0; i <= gridRows; i++) {
+				for (int j = 0; j <= gridColumns; j++) {
 					if (i % 2 == 0 || j % 2 == 0) {
 						blocks[i][j] = new Wall(i, j);
 					} else {
@@ -165,6 +186,14 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 
 	public boolean isBlockVisited(Block block) {
 		return visited.contains(block);
+	}
+
+	@Override
+	public boolean validate(int gridRows, int gridColumns) {
+		if (gridRows > 4 && gridColumns > 4 && gridRows % 2 == 0 && gridColumns % 2 == 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

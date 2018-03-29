@@ -4,5 +4,7 @@ import com.nmittal.maze.IMaze;
 
 public interface IMazeGenerator {
 
-	public IMaze generateMaze(int gridRows, int gridColumns);
+	IMaze generateMaze(int gridRows, int gridColumns);
+
+	boolean validate(int gridRows, int gridColumns);
 }
