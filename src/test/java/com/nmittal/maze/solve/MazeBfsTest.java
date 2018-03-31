@@ -1,15 +1,13 @@
-package com.nmittal.maze;
+package com.nmittal.maze.solve;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.nmittal.maze.Aisle;
-import com.nmittal.maze.Block;
-import com.nmittal.maze.IMazeSolver;
-import com.nmittal.maze.Maze;
-import com.nmittal.maze.MazeBuilder;
-import com.nmittal.maze.MazeSolverDfs;
-import com.nmittal.maze.Wall;
+import com.nmittal.maze.domain.Aisle;
+import com.nmittal.maze.domain.Block;
+import com.nmittal.maze.domain.Maze;
+import com.nmittal.maze.domain.Wall;
+import com.nmittal.maze.util.MazeBuilder;
 
 /**
  * JUnit to test the Maze
@@ -17,57 +15,65 @@ import com.nmittal.maze.Wall;
  * @author Narain Mittal
  * 
  */
-public class MazeDfsTest {
+public class MazeBfsTest {
+
+	private IMazeSolver bfs;
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testInsufficientMazeDataException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs(maze));
+		bfs = new MazeSolverBfs(maze);
+		bfs.solve();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeDataException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 2 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs(maze));
+		bfs = new MazeSolverBfs(maze);
+		bfs.solve();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeDataException2() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		maze.solve(new MazeSolverDfs(maze));
+		bfs = new MazeSolverBfs(maze);
+		bfs.solve();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeStartException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 5, 5, 3, 1);
-		maze.solve(new MazeSolverDfs(maze));
+		bfs = new MazeSolverBfs(maze);
+		bfs.solve();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMazeEndException() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 5, 5);
-		maze.solve(new MazeSolverDfs(maze));
+		bfs = new MazeSolverBfs(maze);
+		bfs.solve();
 	}
 
 	@Test
 	public void testMazeSolution() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 1);
-		IMazeSolver solver = new MazeSolverDfs(maze);
-		Assert.assertTrue(maze.solve(solver));
+		bfs = new MazeSolverBfs(maze);
+		Assert.assertTrue(bfs.solve());
 		Block[][] blocks = maze.getBlocks();
 		for (Block[] bl : blocks) {
 			for (Block b : bl) {
 				if (b instanceof Wall) {
-					Assert.assertFalse(solver.isBlockVisited(b));
-					Assert.assertFalse(solver.isBlockInSolution(b));
+					Assert.assertFalse(bfs.isBlockVisited(b));
+					Assert.assertFalse(bfs.isBlockInSolution(b));
 				} else if (b instanceof Aisle) {
-					Assert.assertTrue(solver.isBlockVisited(b));
-					Assert.assertTrue(solver.isBlockInSolution(b));
+					Assert.assertTrue(bfs.isBlockVisited(b));
+					Assert.assertTrue(bfs.isBlockInSolution(b));
 				}
 			}
 		}
@@ -77,7 +83,8 @@ public class MazeDfsTest {
 	public void testMazeNoSolution() {
 		int[][] data = new int[][] { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 		Maze maze = MazeBuilder.buildMaze(data, 0, 1, 3, 2);
-		Assert.assertFalse(maze.solve(new MazeSolverDfs(maze)));
+		bfs = new MazeSolverBfs(maze);
+		Assert.assertFalse(bfs.solve());
 	}
 
 }

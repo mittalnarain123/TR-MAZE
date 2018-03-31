@@ -1,4 +1,6 @@
-package com.nmittal.maze;
+package com.nmittal.maze.domain;
+
+import com.nmittal.maze.solve.IMazeSolver;
 
 /**
  * Maze interface provides skeleton for Maze data structure.
@@ -17,14 +19,6 @@ public interface IMaze {
 	 * @return End block
 	 */
 	public Block getEnd();
-
-	/**
-	 * Attempts to solve the maze with the selected algorithm
-	 * 
-	 * @param mazeSolver
-	 * @return
-	 */
-	public boolean solve(IMazeSolver mazeSolver);
 
 	/**
 	 * Returns String representation of Maze

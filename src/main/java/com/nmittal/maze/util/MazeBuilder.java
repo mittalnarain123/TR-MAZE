@@ -1,6 +1,11 @@
-package com.nmittal.maze;
+package com.nmittal.maze.util;
 
 import java.util.Objects;
+
+import com.nmittal.maze.domain.Aisle;
+import com.nmittal.maze.domain.Block;
+import com.nmittal.maze.domain.Maze;
+import com.nmittal.maze.domain.Wall;
 
 public class MazeBuilder {
 

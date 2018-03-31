@@ -1,4 +1,6 @@
-package com.nmittal.maze;
+package com.nmittal.maze.domain;
+
+import com.nmittal.maze.solve.IMazeSolver;
 
 /**
  * Implementation of Aisle object.
@@ -14,7 +16,7 @@ public class Aisle extends Block {
 
 	@Override
 	public String display(IMazeSolver solver) {
-		return solver.isBlockInSolution(this) ? " * " : "   ";
+		return (solver != null && solver.isBlockInSolution(this)) ? " * " : "   ";
 	}
 
 }

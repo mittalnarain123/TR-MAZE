@@ -1,4 +1,6 @@
-package com.nmittal.maze;
+package com.nmittal.maze.domain;
+
+import com.nmittal.maze.solve.IMazeSolver;
 
 /**
  * 

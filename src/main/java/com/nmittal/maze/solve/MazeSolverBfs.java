@@ -1,4 +1,4 @@
-package com.nmittal.maze;
+package com.nmittal.maze.solve;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -8,6 +8,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
+
+import com.nmittal.maze.domain.Aisle;
+import com.nmittal.maze.domain.Block;
+import com.nmittal.maze.domain.IMaze;
 
 /**
  * Applies the BFS algorithm to solve the Maze. Uses queue data structure to
