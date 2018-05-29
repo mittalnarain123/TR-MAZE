@@ -24,7 +24,7 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 
 	final Logger LOG = LoggerFactory.getLogger(MazeGeneratorRecursive.class);
 	final static int MIN_GRID = 4;
-	final static int MAX_GRID = 100;
+	final static int MAX_GRID = 200;
 
 	private Block[][] blocks;
 	private Set<Block> visited = new HashSet<>();
@@ -34,13 +34,10 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 	public IMaze generateMaze(int gridRows, int gridColumns) {
 		if (!validate(gridRows, gridColumns)) {
 			throw new IllegalArgumentException(
-					String.format("Invalid grid values : %s, %s - must be even numbers greater than %s ", gridRows,
-							gridColumns, MIN_GRID));
+					String.format("Invalid grid values : %s, %s - must be even numbers between %s - %s ", gridRows,
+							gridColumns, MIN_GRID, MAX_GRID));
 		}
 		blocks = createMazeGrid(gridRows, gridColumns);
-
-		// LOG.info("---------Maze grid-----------");
-		// LOG.info("\n" + new Maze(blocks, null, null).display(null));
 
 		Block start = convertToAisle(0, 0);
 		Block end = convertToAisle(gridRows, gridColumns);
@@ -52,8 +49,6 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 
 		IMaze maze = new Maze(blocks, start, end);
 
-		LOG.info("---------Maze generated-----------");
-		LOG.info("\n" + maze.display(null));
 		return maze;
 	}
 
@@ -112,8 +107,6 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 			});
 		}
 
-		// TODO: check immediate next
-
 		return neighbours;
 	}
 
@@ -169,7 +162,6 @@ public class MazeGeneratorRecursive implements IMazeGenerator {
 	public Block convertToAisle(int x, int y) {
 		try {
 			Block block = new Aisle(x, y);
-			LOG.info(String.format("New Aisle created: %s", block));
 			blocks[x][y] = block;
 			return block;
 		} catch (ArrayIndexOutOfBoundsException a) {

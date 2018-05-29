@@ -52,19 +52,19 @@ public class MazeSolverBfs implements IMazeSolver {
 
 	private boolean solveBfs() {
 		Optional<Block> block = Optional.ofNullable(queue.poll());
-		if (!block.isPresent()) {
-			// queue empty and not reached the finish yet; no solution
-			return false;
-		} else {
+
+		while (block.isPresent()) {
 			if (block.get().equals(maze.getEnd())) {
 				// reached finish, exit the program
 				buildSolutionPath();
 				return true;
 			} else {
 				process(block.get());
+				block = Optional.ofNullable(queue.poll());
 			}
 		}
-		return solveBfs();
+		// No solution
+		return false;
 	}
 
 	private void process(Block block) {

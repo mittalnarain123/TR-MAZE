@@ -81,11 +81,9 @@ public class MazeSolverDfs implements IMazeSolver {
 
 	private boolean solveDfs() {
 		Optional<Block> block = Optional.ofNullable(stack.peekFirst());
-		if (!block.isPresent()) {
-			// stack empty and not reached the finish yet; no solution
-			this.solutionBlocks.clear();
-			return false;
-		} else {
+
+		while (block.isPresent()) {
+
 			if (block.get().equals(maze.getEnd())) {
 				// reached finish, exit the program
 				return true;
@@ -99,8 +97,12 @@ public class MazeSolverDfs implements IMazeSolver {
 					this.solutionBlocks.remove(stack.pop());
 				}
 			}
+
+			block = Optional.ofNullable(stack.peekFirst());
 		}
-		return solveDfs();
+		// stack empty and not reached the finish yet; no solution
+		this.solutionBlocks.clear();
+		return false;
 	}
 
 	private void traverseNextBlock(Block next) {
